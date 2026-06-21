@@ -40,6 +40,22 @@ function App() {
       transition: { duration: 0.8, ease: "easeOut" }
     }
   };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
   return (
     <div className="landing-container" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', overflowX: 'hidden', boxSizing: 'border-box' }}>
       
@@ -196,24 +212,29 @@ function App() {
         {/* Gradient shadow dari teks atas */}
         <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 'clamp(50px, 15vw, 200px)', background: 'linear-gradient(to bottom, #000, transparent)', pointerEvents: 'none', zIndex: 5 }}></div>
 
-        <div style={{
-          position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', maxWidth: '1400px', gap: '50px', paddingBottom: '100px', boxSizing: 'border-box'
-        }}>
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          style={{
+            position: 'relative', zIndex: 10, display: 'flex', flexDirection: 'row', flexWrap: 'wrap', width: '100%', maxWidth: '1400px', gap: '50px', paddingBottom: '100px', boxSizing: 'border-box'
+          }}>
           {/* Kolom Kiri: Teks */}
           <div style={{ flex: '1 1 600px', display: 'flex', flexDirection: 'column', gap: '30px' }}>
             
             {/* Header Nama */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+            <motion.div variants={fadeInUp} style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
               <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 900, lineHeight: '0.9', margin: 0, textTransform: 'uppercase', letterSpacing: '2px', fontFamily: 'Impact, Anton, sans-serif' }}>
                 RAYHAN <br /> FIQRI HAIKAL
               </h1>
               <h3 style={{ fontSize: 'clamp(1rem, 2vw, 1.5rem)', fontWeight: 700, margin: 0, fontStyle: 'italic', color: '#e0e0e0' }}>
                 SOCIAL MEDIA CREATIVE
               </h3>
-            </div>
+            </motion.div>
 
             {/* About Me */}
-            <div>
+            <motion.div variants={fadeInUp}>
               <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 900, margin: '0 0 10px 0', fontFamily: 'Impact, Anton, sans-serif', textTransform: 'uppercase' }}>ABOUT ME</h2>
               <p style={{ fontSize: '0.95rem', lineHeight: '1.6', color: '#ccc', margin: 0, textAlign: 'justify' }}>
                 Halo! Saya Rey, lulusan Program Studi Ilmu Komunikasi dari Universitas Ahmad Dahlan
@@ -228,17 +249,17 @@ function App() {
                 konsep menjadi karya yang tidak hanya memiliki nilai estetika, tetapi juga mampu
                 memberikan dampak serta membangun keterhubungan yang kuat dengan <span className="typing-effect">audiens.</span>
               </p>
-            </div>
+            </motion.div>
 
             {/* Education */}
-            <div>
+            <motion.div variants={fadeInUp}>
               <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 900, margin: '0 0 5px 0', fontFamily: 'Impact, Anton, sans-serif', textTransform: 'uppercase' }}>EDUCATION</h2>
               <p style={{ fontSize: '1rem', color: '#eee', margin: '0 0 5px 0' }}>S1 - Ilmu Komunikasi Universitas Ahmad Dahlan</p>
               <p style={{ fontSize: '1rem', fontWeight: 'bold', color: '#fff', margin: 0 }}>GPA: 3.89/ 4.00</p>
-            </div>
+            </motion.div>
 
             {/* Dua Kolom Bawah: Software & Contact */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '40px' }}>
+            <motion.div variants={fadeInUp} style={{ display: 'flex', flexWrap: 'wrap', gap: '40px' }}>
               {/* Software */}
               <div style={{ flex: '1 1 200px' }}>
                 <h2 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 900, margin: '0 0 15px 0', fontFamily: 'Impact, Anton, sans-serif', textTransform: 'uppercase' }}>SOFTWARE</h2>
@@ -293,11 +314,11 @@ function App() {
                   </motion.a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Kolom Kanan: Foto */}
-          <div style={{ flex: '1 1 400px', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', position: 'relative', minHeight: '500px' }}>
+          <motion.div variants={fadeInUp} style={{ flex: '1 1 400px', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', position: 'relative', minHeight: '500px' }}>
              {/* Lingkaran Glow Biru di belakang foto */}
              <div style={{ position: 'absolute', width: '80%', paddingBottom: '80%', background: 'radial-gradient(circle, rgba(0,200,255,1) 0%, rgba(0,200,255,0.4) 50%, rgba(0,0,0,0) 70%)', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1, borderRadius: '50%' }}></div>
              <img src="/lemen.png" alt="Rayhan Fiqri Haikal" style={{ 
@@ -310,9 +331,9 @@ function App() {
                WebkitMaskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)',
                maskImage: 'linear-gradient(to bottom, black 70%, transparent 100%)'
              }} />
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
         {/* Gradient shadow menyatu ke bagian 3 */}
         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 'clamp(50px, 15vw, 200px)', background: 'linear-gradient(to bottom, transparent, #000)', pointerEvents: 'none', zIndex: 5 }}></div>
